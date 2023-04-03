@@ -1,7 +1,7 @@
 #include "observable.h"
 
 template < class T >
-Observable::Observable() {}
+Observable<T>::Observable() {}
 
 template < class T >
-Observable::~Observable() {}
+Observable<T>::~Observable() {}
