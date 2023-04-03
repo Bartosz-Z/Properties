@@ -1,12 +1,15 @@
 #include "property_binding.h"
 
-template < class T >
-PropetyBinding<T>::PropetyBinding(T (*getter)())
+DoublePropetyBinding::DoublePropetyBinding(double (*getter)())
 	: getter(getter) {}
 
-template < class T >
-void PropetyBinding<T>::observe(const T& value)
+void DoublePropetyBinding::observe(double value)
 {
 	for (const auto& observable : observables)
-		observable.observe(getter());
+		observable->observe(getter());
+}
+
+void DoublePropetyBinding::addObserver(const std::shared_ptr< ObservableDouble >& observable)
+{
+	observables.emplace_back(observable);
 }

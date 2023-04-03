@@ -1,7 +1,5 @@
 #include "observable.h"
 
-template < class T >
-Observable<T>::Observable() {}
+ObservableDouble::ObservableDouble() {}
 
-template < class T >
-Observable<T>::~Observable() {}
+ObservableDouble::~ObservableDouble() {}

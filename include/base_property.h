@@ -3,21 +3,21 @@
 
 #include <memory>
 #include <vector>
-#include "property_binding.h"
+#include "observable.h"
 
-template < class T >
-class BaseProperty : public Observable<T>
+class BaseDoubleProperty : public ObservableDouble
 {
 public:
-	BaseProperty(const T& value);
+	BaseDoubleProperty(double value);
 
-	T get() const { return value; }
-	void set(const T& value);
-	void observe(const T& value) override { set(value); }
+	double get() const { return value; }
+	void set(double value);
+	void observe(double value) override { set(value); }
+	void addObserver(const std::shared_ptr< ObservableDouble >& observable) override;
 
 private:
-	T value;
-	std::vector< std::shared_ptr< PropetyBinding<T> > > bindings;
+	double value;
+	std::vector< std::shared_ptr< ObservableDouble > > observables;
 };
 
 #endif

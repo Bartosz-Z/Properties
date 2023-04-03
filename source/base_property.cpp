@@ -1,13 +1,16 @@
 #include "base_property.h"
 
-template < class T >
-BaseProperty<T>::BaseProperty(const T& value)
+BaseDoubleProperty::BaseDoubleProperty(double value)
 	: value(value) {}
 
-template < class T >
-void BaseProperty<T>::set(const T& value)
+void BaseDoubleProperty::set(double value)
 {
 	this->value = value;
-	for (const auto& binding : bindings)
-		binding.observe(this->value);
+	for (const auto& observable : observables)
+		observable->observe(this->value);
+}
+
+void BaseDoubleProperty::addObserver(const std::shared_ptr< ObservableDouble >& observable)
+{
+	observables.emplace_back(observable);
 }

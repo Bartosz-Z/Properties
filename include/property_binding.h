@@ -1,21 +1,22 @@
 #ifndef PROPERTY_BINDING_H
 #define PROPERTY_BINDING_H
 
+#include <memory>
 #include <vector>
 #include "observable.h"
 
-template < class T >
-class PropetyBinding : public Observable<T>
+class DoublePropetyBinding : public ObservableDouble
 {
 public:
-	PropetyBinding(T (*getter)());
+	DoublePropetyBinding(double (*getter)());
 
-	T get() const { return getter(); }
-	void observe(const T& value) override;
+	double get() const { return getter(); }
+	void observe(double value) override;
+	void addObserver(const std::shared_ptr< ObservableDouble >& observable) override;
 
 private:
-	T (*getter)();
-	std::vector< Observable<T> > observables;
+	double (*getter)();
+	std::vector< std::shared_ptr< ObservableDouble > > observables;
 };
 
 #endif

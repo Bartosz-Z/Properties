@@ -1,16 +1,18 @@
 #ifndef OBSERVABLE_H
 #define OBSERVABLE_H
 
-template < class T >
-class Observable
+#include <memory>
+
+class ObservableDouble
 {
 public:
-	virtual ~Observable();
+	virtual ~ObservableDouble();
 
-	virtual void observe(const T& value) = 0;
+	virtual void observe(double value) = 0;
+	virtual void addObserver(const std::shared_ptr< ObservableDouble >& observable) = 0;
 
 protected:
-	Observable();
+	ObservableDouble();
 };
 
 #endif
